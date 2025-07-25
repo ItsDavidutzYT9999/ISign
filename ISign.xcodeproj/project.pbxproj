@@ -1,4 +1,4 @@
-// !\$*UTF8*\$!
+// !$*UTF8*$!
 {
   archiveVersion = 1;
   classes = {
@@ -39,11 +39,11 @@
       isa = PBXNativeTarget;
       buildConfigurationList = A1B2C3D4E5F6G7H8I9JA;
       buildPhases = (A1B2C3D4E5F6G7H8I9J8);
+      dependencies = ();
       name = ISign;
       productName = ISign;
       productReference = A1B2C3D4E5F6G7H8I9JB;
       productType = "com.apple.product-type.application";
-      dependencies = ();
     };
 /* End PBXNativeTarget section */
 
