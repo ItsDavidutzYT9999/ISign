@@ -1,22 +1,49 @@
-# This workflow will build a Swift project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
-
-name: Swift
+name: Build iOS IPA
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
-
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Install CocoaPods if needed
+      run: |
+        if [ -f Podfile ]; then
+          sudo gem install cocoapods
+          pod install
+        fi
+
+    - name: Clean and Archive
+      run: |
+        xcodebuild clean -project ISign.xcodeproj -scheme ISign -configuration Release
+
+        xcodebuild archive \
+          -project ISign.xcodeproj \
+          -scheme ISign \
+          -configuration Release \
+          -archivePath ${{ github.workspace }}/build/ISign.xcarchive \
+          DEVELOPMENT_TEAM=YOUR_TEAM_ID \
+          CODE_SIGN_IDENTITY="Apple Distribution"
+
+    - name: Export IPA
+      run: |
+        xcodebuild -exportArchive \
+          -archivePath ${{ github.workspace }}/build/ISign.xcarchive \
+          -exportOptionsPlist exportOptions.plist \
+          -exportPath ${{ github.workspace }}/build/ipa
+
+    - name: Upload IPA artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ISign.ipa
+        path: build/ipa/*.ipa
