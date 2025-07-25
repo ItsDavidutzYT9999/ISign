@@ -32,8 +32,7 @@ jobs:
           -scheme ISign \
           -configuration Release \
           -archivePath ${{ github.workspace }}/build/ISign.xcarchive \
-          DEVELOPMENT_TEAM=YOUR_TEAM_ID \
-          CODE_SIGN_IDENTITY="Apple Distribution"
+          CODE_SIGNING_ALLOWED=NO
 
     - name: Export IPA
       run: |
