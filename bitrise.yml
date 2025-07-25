@@ -1,91 +1,38 @@
----
-format_version: '23'
+format_version: '11'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ios
+
 app:
   envs:
-  - TEST_SHARD_COUNT: 2
-  - BITRISE_PROJECT_PATH: ISign.xcodeproj
-    opts:
-      is_expand: false
-  - BITRISE_SCHEME: ISign
-    opts:
-      is_expand: false
-  - BITRISE_DISTRIBUTION_METHOD: ad-hoc
-    opts:
-      is_expand: false
-pipelines:
-  run_tests:
-    workflows:
-      build_for_testing: {}
-      test_without_building:
-        depends_on:
-        - build_for_testing
-        parallel: "$TEST_SHARD_COUNT"
+    - BITRISE_PROJECT_PATH: ISign.xcodeproj
+      opts:
+        is_expand: false
+    - BITRISE_SCHEME: ISign
+      opts:
+        is_expand: false
+    - BITRISE_EXPORT_METHOD: development
+      opts:
+        is_expand: false
+
 workflows:
-  archive_and_export_app:
-    summary: Run your Xcode tests and create an IPA file to install your app on a
-      device or share it with your team.
-    description: The workflow will first clone your Git repository, cache and
-      install your project's dependencies if any, run your Xcode tests, export
-      an IPA file from the project and save it.
+  build_unsigned_ipa:
     steps:
-    - activate-ssh-key@4:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@8: {}
-    - deploy-to-bitrise-io@2: {}
-  build_for_testing:
-    steps:
-    - activate-ssh-key@4:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@8: {}
-    - xcode-build-for-test:
-        inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
-        - destination: generic/platform=iOS Simulator
-        - cache_level: none
-    - deploy-to-bitrise-io@2:
-        inputs:
-        - pipeline_intermediate_files: |-
-            BITRISE_TEST_SHARDS_PATH
-            BITRISE_TEST_BUNDLE_PATH
-  run_tests:
-    summary: Run your Xcode tests and get the test report.
-    description: The workflow will first clone your Git repository, cache and
-      install your project's dependencies if any, run your Xcode tests and save
-      the test results.
-    steps:
-    - activate-ssh-key@4:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@8: {}
-    - restore-cocoapods-cache@1: {}
-    - restore-spm-cache@1: {}
-    - cocoapods-install@2:
-        inputs:
-        - is_cache_disabled: 'true'
-    - xcode-test@6:
-        inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
-        - test_repetition_mode: retry_on_failure
-        - cache_level: none
-    - save-cocoapods-cache@1: {}
-    - save-spm-cache@1: {}
-    - deploy-to-bitrise-io@2: {}
-    triggers:
-      push:
-      - branch: main
-      pull_request:
-      - source_branch: "*"
-  test_without_building:
-    steps:
-    - pull-intermediate-files@1: {}
-    - xcode-test-without-building@0:
-        inputs:
-        - only_testing: "$BITRISE_TEST_SHARDS_PATH/$BITRISE_IO_PARALLEL_INDEX"
-        - xctestrun: "$BITRISE_TEST_BUNDLE_PATH/all_tests.xctestrun"
-meta:
-  bitrise.io:
-    stack: osx-xcode-16.4.x
-    machine_type_id: g2.mac.large
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+
+      - git-clone@8: {}
+
+      - xcode-archive@4:
+          inputs:
+            project_path: "$BITRISE_PROJECT_PATH"
+            scheme: "$BITRISE_SCHEME"
+            export_method: "$BITRISE_EXPORT_METHOD"
+            configuration: Release
+            automatic_code_signing: "off"
+            team_id: ""
+            xcconfig_content: |-
+              CODE_SIGNING_ALLOWED = NO
+              CODE_SIGNING_REQUIRED = NO
+              CODE_SIGNING_ENTITLEMENTS =
+
+      - deploy-to-bitrise-io@2: {}
