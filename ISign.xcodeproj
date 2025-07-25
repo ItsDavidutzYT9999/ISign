@@ -1,0 +1,135 @@
+// !\$*UTF8*\$!
+{
+  archiveVersion = 1;
+  classes = {
+  };
+  objectVersion = 55;
+  objects = {
+
+/* Begin PBXBuildFile section */
+    A1B2C3D4E5F6G7H8I9J0 /* ISignApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6G7H8I9J1 /* ISignApp.swift */; };
+    A1B2C3D4E5F6G7H8I9J2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6G7H8I9J3 /* ContentView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+    A1B2C3D4E5F6G7H8I9J1 /* ISignApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISignApp.swift; sourceTree = "<group>"; };
+    A1B2C3D4E5F6G7H8I9J3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+    A1B2C3D4E5F6G7H8I9J4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+    A1B2C3D4E5F6G7H8I9J5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+    A1B2C3D4E5F6G7H8I9J6 /* ISign */ = {isa = PBXGroup; children = (A1B2C3D4E5F6G7H8I9J1, A1B2C3D4E5F6G7H8I9J3, A1B2C3D4E5F6G7H8I9J4, A1B2C3D4E5F6G7H8I9J5); name = ISign; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+    A1B2C3D4E5F6G7H8I9J7 /* Root Group */ = {
+      isa = PBXGroup;
+      children = (A1B2C3D4E5F6G7H8I9J6);
+      sourceTree = "<group>";
+    };
+/* End PBXGroup section */
+
+/* Begin PBXSourcesBuildPhase section */
+    A1B2C3D4E5F6G7H8I9J8 /* Sources */ = {
+      isa = PBXSourcesBuildPhase;
+      files = (A1B2C3D4E5F6G7H8I9J0, A1B2C3D4E5F6G7H8I9J2);
+    };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+    A1B2C3D4E5F6G7H8I9J9 /* ISign */ = {
+      isa = PBXNativeTarget;
+      buildConfigurationList = A1B2C3D4E5F6G7H8I9JA;
+      buildPhases = (A1B2C3D4E5F6G7H8I9J8);
+      name = ISign;
+      productName = ISign;
+      productReference = A1B2C3D4E5F6G7H8I9JB;
+      productType = "com.apple.product-type.application";
+    };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+    A1B2C3D4E5F6G7H8I9JC /* Project object */ = {
+      isa = PBXProject;
+      attributes = {
+        LastUpgradeCheck = 1430;
+      };
+      buildConfigurationList = A1B2C3D4E5F6G7H8I9JD;
+      compatibilityVersion = "Xcode 14.0";
+      developmentRegion = en;
+      hasScannedForEncodings = 0;
+      knownRegions = (en);
+      mainGroup = A1B2C3D4E5F6G7H8I9J7;
+      productRefGroup = A1B2C3D4E5F6G7H8I9J6;
+      projectDirPath = "";
+      projectRoot = "";
+      targets = (A1B2C3D4E5F6G7H8I9J9);
+    };
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+    A1B2C3D4E5F6G7H8I9JD /* Build configuration list for PBXProject */ = {
+      isa = XCConfigurationList;
+      buildConfigurations = (A1B2C3D4E5F6G7H8I9JE, A1B2C3D4E5F6G7H8I9JF);
+      defaultConfigurationIsVisible = 0;
+      defaultConfigurationName = Release;
+    };
+    A1B2C3D4E5F6G7H8I9JA /* Build configuration list for PBXNativeTarget "ISign" */ = {
+      isa = XCConfigurationList;
+      buildConfigurations = (A1B2C3D4E5F6G7H8I9JG, A1B2C3D4E5F6G7H8I9JH);
+      defaultConfigurationIsVisible = 0;
+      defaultConfigurationName = Release;
+    };
+    A1B2C3D4E5F6G7H8I9JE /* Release configuration */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+        CODE_SIGN_STYLE = Automatic;
+        CURRENT_PROJECT_VERSION = 1;
+        INFOPLIST_FILE = Info.plist;
+        IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+        PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.isign;
+        PRODUCT_NAME = ISign;
+        SWIFT_VERSION = 5.0;
+      };
+      name = Release;
+    };
+    A1B2C3D4E5F6G7H8I9JF /* Debug configuration */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+        CODE_SIGN_STYLE = Automatic;
+        CURRENT_PROJECT_VERSION = 1;
+        INFOPLIST_FILE = Info.plist;
+        IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+        PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.isign;
+        PRODUCT_NAME = ISign;
+        SWIFT_VERSION = 5.0;
+      };
+      name = Debug;
+    };
+    A1B2C3D4E5F6G7H8I9JG /* Release configuration for target */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+        CODE_SIGN_STYLE = Automatic;
+        INFOPLIST_FILE = Info.plist;
+        PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.isign;
+        SWIFT_VERSION = 5.0;
+      };
+      name = Release;
+    };
+    A1B2C3D4E5F6G7H8I9JH /* Debug configuration for target */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+        CODE_SIGN_STYLE = Automatic;
+        INFOPLIST_FILE = Info.plist;
+        PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.isign;
+        SWIFT_VERSION = 5.0;
+      };
+      name = Debug;
+    };
+/* End XCBuildConfiguration section */
+
+  };
+  rootObject = A1B2C3D4E5F6G7H8I9JC;
+}
