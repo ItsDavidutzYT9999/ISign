@@ -43,6 +43,7 @@
       productName = ISign;
       productReference = A1B2C3D4E5F6G7H8I9JB;
       productType = "com.apple.product-type.application";
+      dependencies = ();
     };
 /* End PBXNativeTarget section */
 
