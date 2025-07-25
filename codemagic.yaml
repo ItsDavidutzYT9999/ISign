@@ -1,0 +1,39 @@
+workflows:
+  ios-build:
+    name: Build ISign .ipa
+    environment:
+      xcode: latest
+    scripts:
+      - name: Create exportOptions.plist
+        script: |
+          cat > exportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+          "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>ad-hoc</string>
+            <key>signingStyle</key>
+            <string>manual</string>
+            <key>compileBitcode</key>
+            <false/>
+          </dict>
+          </plist>
+          EOF
+      - name: Build .xcarchive
+        script: |
+          xcodebuild -project ISign.xcodeproj \
+                     -scheme ISign \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -archivePath $CM_BUILD_DIR/ISign.xcarchive \
+                     clean archive
+      - name: Export .ipa
+        script: |
+          xcodebuild -exportArchive \
+                     -archivePath $CM_BUILD_DIR/ISign.xcarchive \
+                     -exportOptionsPlist exportOptions.plist \
+                     -exportPath $CM_BUILD_DIR/ExportedIPA
+    artifacts:
+      - ExportedIPA/*.ipa
