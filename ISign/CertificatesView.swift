@@ -19,22 +19,22 @@ struct CertificatesView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Certificat (.p12)")) {
+            Section(header: Text("P12 File")) {
                 HStack {
                     Image(systemName: "lock.doc")
-                    Text(p12URL?.lastPathComponent ?? "Niciun fișier selectat")
+                    Text(p12URL?.lastPathComponent ?? "No file selected")
                     Spacer()
-                    Button("Selectează") { showP12Picker = true }
+                    Button("Select File") { showP12Picker = true }
                 }
-                SecureField("Parolă p12", text: $password)
+                SecureField("P12 Password", text: $password)
             }
 
-            Section(header: Text("Provisioning Profile (.mobileprovision)")) {
+            Section(header: Text("MobileProvision")) {
                 HStack {
                     Image(systemName: "doc.text")
-                    Text(mobileprovisionURL?.lastPathComponent ?? "Niciun fișier selectat")
+                    Text(mobileprovisionURL?.lastPathComponent ?? "No file selected")
                     Spacer()
-                    Button("Selectează") { showProvisionPicker = true }
+                    Button("Select File") { showProvisionPicker = true }
                 }
             }
 
@@ -73,7 +73,7 @@ struct CertificatesView: View {
     private func upload() async {
         guard let p12URL, let mobileprovisionURL else { return }
         isBusy = true
-        status = "Trimitere către backend..."
+        status = "Sending to backend..."
         defer { isBusy = false }
 
         let _ = p12URL.startAccessingSecurityScopedResource()
@@ -86,7 +86,7 @@ struct CertificatesView: View {
             let resp = try await HTTPClient.uploadCertificates(p12URL: p12URL, password: password, mobileprovisionURL: mobileprovisionURL)
             status = resp.message ?? resp.status
         } catch {
-            status = "Eroare încărcare: \(error.localizedDescription)"
+            status = "Error at uploading: \(error.localizedDescription)"
         }
     }
 }
